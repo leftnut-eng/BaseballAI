@@ -1,10 +1,10 @@
 import ollama
-def chatCompletion(prompt: str):
+def chatCompletion(prompt: str, image: str, model: str = "gemma3:4b"):
     response = ollama.chat(
-        model = "gemma3:4b",
+        model = model,
         messages = [
             {"role": "system", "content": "you are a baseball coach"},
-            {"role": "user", "content": prompt}
+            {"role": "user", "content": prompt, "images": [image]}
         ],
         options={
         'temperature': 0.7,
@@ -12,4 +12,4 @@ def chatCompletion(prompt: str):
         }
     )
     return response["message"]["content"]
-print(chatCompletion(input("Enter Prompt: ")))
+print(chatCompletion(input("Enter Prompt: "), "animation.gif"))
